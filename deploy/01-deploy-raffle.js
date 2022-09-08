@@ -16,7 +16,7 @@ const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
 vrfCoordinatorV2Address = vrfCoordinatorV2Mock.address
 const transactionResponse = await vrfCoordinatorV2Mock.createSubscription()
 const transactionReceipt = await transactionResponse.wait()
-const subscriptionId = transactionReceipt.events[0].args.subId
+subscriptionId = transactionReceipt.events[0].args.subId
 await vrfCoordinatorV2Mock.fundSubscription(subscriptionId,FUND_ETH_AMOUNT)
 }else{
 vrfCoordinatorV2Address = networkConfig[chainId]["vrfCoordinatorV2"]
