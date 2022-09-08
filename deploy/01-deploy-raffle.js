@@ -30,7 +30,7 @@ const interval = networkConfig[chainId]["interval"]
 
 const raffle= await deploy("Raffle",{
 from: deployer,
-args:[vrfCoordinatorV2Address, gasLane,entranceFee, subscriptionId,callbackGasLimit,interval],
+args:[vrfCoordinatorV2Address, entranceFee, gasLane, subscriptionId, callbackGasLimit, interval],
 log:true,
 waitConfirmations :network.config.blockConfirmations || 1
 })
