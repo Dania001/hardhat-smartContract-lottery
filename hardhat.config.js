@@ -16,22 +16,32 @@ const ETHERSCAN_API_KEY = "JX48E9CTPT2ZD2Q755F5FSJ7AYG4H9VNPM"
 
 
 module.exports = {
-defaultNetwork: "hardhat",
+  defaultNetwork: "hardhat",
     networks: {
         hardhat: {
             chainId: 31337,
         },
         localhost:{
-        chainId:31337,
+           chainId: 31337,
         },
         rinkeby: {
             url: RINKEBY_RPC_URL,
             accounts: [PRIVATE_KEY],
             chainId: 4,
             blockConfirmations: 6,
+            saveDeployments: true,
         },
     },
-  solidity: "0.8.7",
+  solidity: {
+        compilers: [
+            {
+                version: "0.8.7",
+            },
+            {
+                version: "0.4.24",
+            },
+        ],
+    },
   namedAccounts: {
         deployer: {
             default: 0,
@@ -39,6 +49,21 @@ defaultNetwork: "hardhat",
         },
         player: {
             default: 1,
+        },
+    },
+   contractSizer: {
+        runOnCompile: false,
+        only: ["Raffle"],
+    },
+    mocha: {
+        timeout: 500000, // 500 seconds max for running tests
+    },
+    etherscan: {
+        // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
+        apiKey: {
+            rinkeby: ETHERSCAN_API_KEY,
+            goerli: ETHERSCAN_API_KEY,
+            // polygon: POLYGONSCAN_API_KEY,
         },
     },
 };
